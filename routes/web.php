@@ -47,3 +47,35 @@ Route::get('/enderecos', function () {
         echo "<hr>";
     }
 });
+
+Route::get('/inserir', function() {
+    $c = new Cliente();
+    $c->nome = "Jose";
+    $c->telefone = "27 996548214";
+    $c->save();
+
+    $e = new Endereco();
+    $e-> rua = "Av. do Estado";
+    $e-> numero = "99";
+    $e-> bairro = "Cobi de Cima";
+    $e-> cidade = "Cariacroca";
+    $e-> uf = "ES";
+    $e-> cep = "29303-003";
+
+    $c->endereco()->save($e);
+
+    $c = new Cliente();
+    $c->nome = "Marcio";
+    $c->telefone = "27 999654752";
+    $c->save();
+
+    $e = new Endereco();
+    $e-> rua = "Av. do Brasil";
+    $e-> numero = "1500";
+    $e-> bairro = "Nova Bahia";
+    $e-> cidade = "Vila Velha";
+    $e-> uf = "ES";
+    $e-> cep = "29699-956";
+    
+    $c->endereco()->save($e);
+});
