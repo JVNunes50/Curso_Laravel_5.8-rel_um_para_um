@@ -13,6 +13,7 @@
 
 use App\Cliente;
 use App\Endereco;
+use Symfony\Component\HttpKernel\Client;
 
 Route::get('/clientes', function () {
     $clientes = Cliente::all();
@@ -78,4 +79,10 @@ Route::get('/inserir', function() {
     $e-> cep = "29699-956";
     
     $c->endereco()->save($e);
+});
+
+Route::get('/clientes/json', function(){
+    // $clientes = Cliente::all();
+    $clientes = Cliente::with(['endereco'])->get();
+    return $clientes->toJson();
 });
